@@ -13,7 +13,7 @@ stages:
 - stage: Build
   jobs: 
   - job: FirstJob
-    step: 
+    steps: 
     - bash: echo Hello, world! changed
       displayName: 'Run a one-line script'
   - job: SecondJob
