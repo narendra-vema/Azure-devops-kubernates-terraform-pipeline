@@ -9,7 +9,29 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Build
+  jobs: 
+  - job: FirstJob
+    step: 
+    - bash: echo Hello, world! changed
+      displayName: 'Run a one-line script'
+  - job: SecondJob
+    dependsOn: FirstJob
+    condition: succeeded('FirstJob')
+    steps:
+    - bash: echo Hello from job2
+      displayName: 'Run a one-line script in job2'
+- stage : Devdeploy
 
+  jobs:
+  - job: DevdeployJob
+    steps:
+    - bash: echo Hello from DevdeployJob
+      displayName: 'Run a one-line script in DevdeployJob'
+  - job: DevdeployJob2
+    dependsOn: DevdeployJob
+    condition: succeeded('DevdeployJob')
+    steps:
+    - bash: echo Hello from DevdeployJob2
+      displayName: 'Run a one-line script in DevdeployJob2'
