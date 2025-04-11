@@ -11,7 +11,7 @@ pool:
 
 stages:
 - stage: Build
-  variable:
+  variables:
     stageName: build stage
   jobs: 
   - job: FirstJob
@@ -25,7 +25,7 @@ stages:
     - bash: echo Hello from job2
       displayName: 'Run a one-line script in job2'
 - stage : Devdeploy
-  variable:
+  variables:
     stageName: Dev build stage
   dependsOn: Build
   jobs:
