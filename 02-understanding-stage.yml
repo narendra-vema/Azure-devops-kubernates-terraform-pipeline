@@ -23,7 +23,7 @@ stages:
     - bash: echo Hello from job2
       displayName: 'Run a one-line script in job2'
 - stage : Devdeploy
-
+  dependsOn: Build
   jobs:
   - job: DevdeployJob
     steps:
