@@ -31,3 +31,16 @@ jobs:
       echo Add other tasks to build, test, and deploy your project.
       echo See https://aka.ms/yaml
     displayName: 'Run a multi-line script in job2'
+- job: job3
+  dependsOn: 
+   - job2
+   - job1
+  condition: succeeded('job2')
+  steps:
+  - script: echo Hello from job3
+    displayName: 'Run a one-line script in job3'
+
+  - script: |
+      echo Add other tasks to build, test, and deploy your project.
+      echo See https://aka.ms/yaml
+    displayName: 'Run a multi-line script in job3'
