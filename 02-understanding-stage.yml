@@ -11,10 +11,12 @@ pool:
 
 stages:
 - stage: Build
+  variable:
+    stageName: build stage
   jobs: 
   - job: FirstJob
     steps: 
-    - bash: echo Hello, world! changed
+    - bash: echo Hello $(stageName) is running keep wait!
       displayName: 'Run a one-line script'
   - job: SecondJob
     dependsOn: FirstJob
@@ -23,11 +25,13 @@ stages:
     - bash: echo Hello from job2
       displayName: 'Run a one-line script in job2'
 - stage : Devdeploy
+  variable:
+    stageName: Dev build stage
   dependsOn: Build
   jobs:
   - job: DevdeployJob
     steps:
-    - bash: echo Hello from DevdeployJob
+    - bash: echo Hello $(stageName) is running keep wait!
       displayName: 'Run a one-line script in DevdeployJob'
   - job: DevdeployJob2
     dependsOn: DevdeployJob
